@@ -23,7 +23,7 @@ public class Main3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
 
         ContBrillo = (SeekBar)findViewById(R.id.sb1);
-        imagen = (ImageView)findViewById(R.id.img);
+        imagen = (ImageView)findViewById(R.id.imageView3);
         final BitmapDrawable bitmapDrawable=(BitmapDrawable) imagen.getDrawable();
         filtros = new Filtros();
 
@@ -51,7 +51,7 @@ public class Main3Activity extends AppCompatActivity {
 
     public void Siguiente(View v)
     {
-        Intent i = new Intent(this, Main3Activity.class);
+        Intent i = new Intent(this,Main4Activity.class);
         startActivity(i);
     }
 

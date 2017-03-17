@@ -57,7 +57,7 @@ public class Main3Activity extends AppCompatActivity {
 
     public void Anterior(View v)
     {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, Main2Activity.class);
         startActivity(i);
     }
 

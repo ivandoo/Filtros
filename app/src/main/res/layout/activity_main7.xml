@@ -11,40 +11,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.upam.proyectofiltros.Main5Activity">
 
-    <SeekBar
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/img"
-        android:layout_marginTop="24dp"
-        android:id="@+id/sb1"
-        android:layout_width="match_parent"
-        android:max="255"
-        android:layout_alignParentEnd="true" />
 
-    <SeekBar
-        android:layout_height="wrap_content"
-        android:id="@+id/sb2"
-        android:layout_width="match_parent"
-        android:max="255"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/sb1"
-        android:layout_centerHorizontal="true" />
-
-    <SeekBar
-        android:layout_height="wrap_content"
-        android:id="@+id/sb3"
-        android:layout_width="match_parent"
-        android:max="255"
-        android:layout_marginTop="25dp"
-        android:layout_below="@+id/sb2"
-        android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
         android:layout_marginTop="63dp"
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView7"
         android:layout_below="@+id/sb3"
         android:layout_centerHorizontal="true" />
 
@@ -53,11 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button3"
-        android:layout_marginStart="22dp"
-        android:layout_marginBottom="63dp"
-        android:onClick="Siguiente (Main5Activity)"
+        android:layout_marginBottom="58dp"
+        android:onClick="Siguiente"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/imageView5" />
+        android:layout_toEndOf="@+id/imageView7" />
 
     <Button
         android:text="ANTERIOR"
@@ -65,8 +38,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/button4"
         android:onClick="Anterior"
+        android:layout_marginEnd="25dp"
         android:layout_alignBaseline="@+id/button3"
         android:layout_alignBottom="@+id/button3"
-        android:layout_toStartOf="@+id/imageView5"
-        android:layout_marginEnd="17dp" />
+        android:layout_toStartOf="@+id/imageView7" />
 </RelativeLayout>

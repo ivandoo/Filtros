@@ -99,8 +99,8 @@ public class Main5Activity extends AppCompatActivity {
 
     public void Siguiente(View v)
     {
-        Intent i = new Intent(this,Main4Activity.class);
-        startActivity(i);
+        Intent in = new Intent(this,Main6Activity.class);
+        startActivity(in);
     }
 
     public void Anterior(View v)

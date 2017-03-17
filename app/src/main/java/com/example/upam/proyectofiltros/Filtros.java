@@ -2,6 +2,14 @@ package com.example.upam.proyectofiltros;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.os.Environment;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.lang.reflect.Array;
+import java.util.Random;
 
 /**
  * Created by Upam on 03/02/17.
@@ -330,9 +338,9 @@ public class Filtros
         int b = 0;
         int a = 0;
         int roja=rojog;
-        int azula=azulg;
-        int verdea=verdeg;
-        int cont;
+        int azul=azulg;
+        int verde=verdeg;
+
         double angulo=180;
         double contraste= Math.pow(r/255,1);
         double contraste1= Math.pow(g/255,1);
@@ -352,18 +360,37 @@ public class Filtros
                 g = (pixel >> 8) & 0xff;
                 b = pixel & 0xff;
 
+                int [] ArrR = new int[256];
+                int [] ArrG = new int[256];
+                int [] ArrB = new int[256];
+
+
 
                 a= Color.alpha(pixel);
                 r=Color.red(pixel);
                 g=Color.green(pixel);
                 b=Color.blue(pixel);
                 r=(int)((r+roja));
-                g=(int)((g+verdea));
-                b=(int)((b+azula));
+                g=(int)((g+verde));
+                b=(int)((b+azul));
 
-                for ( r=0; r<.2; r++)
+                int i=0;
+                for ( i=0; i<.2; i++)
                 {
+                    if(r<.2 || r>5)
+                    {
                     r=1;
+                }
+                    else if (g<.2 || g>5){
+
+                        g=1;
+
+                    }
+                    else if (b<.2 || b>5){
+
+                        b=1;
+
+                    }
 
                 }
 
@@ -380,10 +407,99 @@ public class Filtros
     }
 
 
+    public static Bitmap rotar(Bitmap bitmap) {
+        float angu=90;
+        Matrix matrix = new Matrix();
+        // setup rotation degree
+        matrix.postRotate(angu);
+
+        // return new bitmap rotated using matrix
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+
+    public Bitmap Bordes(Bitmap bitmap){
+        Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+        int p1=0;
+        int p2=0;
+        int p3=0;
+        int umbral=20;
+        int a1=0;
+        int r1=0;
+        int b1=0;
+        int g1=0;
+
+        int a2=0;
+        int r2=0;
+        int b2=0;
+        int g2=0;
+
+        for(int x=0; x<bitmap.getWidth()-2; x++){
+            for(int y=0; y<bitmap.getHeight()-2; y++){
+
+                int pixel = bitmap.getPixel(x, y);
+                p1 = bitmap.getPixel(x, y);
+                p2 = bitmap.getPixel(x+1,y);
+                p3 = bitmap.getPixel(x,y+1);
+
+                int a = (p1 >>> 24) & 0xff;
+                int r = (p1 >> 16) & 0xff;
+                int g = (p1 >> 8) & 0xff;
+                int b = p1 & 0xff;
+
+                a1 = (p2 >>> 24) & 0xff;
+                r1 = (p2 >> 16) & 0xff;
+                g1 = (p2 >> 8) & 0xff;
+                b1 = p2 & 0xff;
+
+                a2 = (p3 >>> 24) & 0xff;
+                r2 = (p3 >> 16) & 0xff;
+                g2 = (p3 >> 8) & 0xff;
+                b2 = p3 & 0xff;
+
+                int d1= (int)Math.pow(r-r1,2.0)+(int)Math.pow(g-g1,2.0)+(int)Math.pow(b-b1,2.0);
+                d1=(int)Math.sqrt(d1);
+                int d2= (int)Math.pow(r-r2,2.0)+(int)Math.pow(g-g2,2.0)+(int)Math.pow(b-b2,2.0);
+                d2=(int)Math.sqrt(d1);
+
+                if((d1>=umbral)|| (d2>=umbral)){
+                    d1=255;
+                }else{
+                    d1=0;
+                }
+                pixel = ((a << 24) | (d1 << 16) | (d1<< 8) | d1);
+                bmp.setPixel(x, y,pixel);
+            }
+
+        }
+        return bmp;
+    }
 
 
+    public void guardarImagen(Bitmap bitmap){
 
+        File almacen= Environment.getExternalStorageDirectory();
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        String fname = "Image-"+ n +".jpg";
+        File file = new File (almacen.getAbsolutePath()+"/Pictures", fname);
+
+        if (file.exists ()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+            Log.i("TAG", "Imagen guardada"+file.getAbsolutePath());
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+    }
 
 }
+
+
 
 

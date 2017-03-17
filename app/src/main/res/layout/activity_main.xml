@@ -25,14 +25,13 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="97dp"
-        android:onClick="Siguiente"
+        android:onClick="Siguiente (MainActivity)"
         android:text="Siguiente" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
-        android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="77dp"
         android:id="@+id/imageView" />

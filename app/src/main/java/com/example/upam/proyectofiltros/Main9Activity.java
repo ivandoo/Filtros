@@ -1,9 +1,5 @@
 package com.example.upam.proyectofiltros;
 
-/**
- * Created by upam on 08/03/17.
- */
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,8 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Main6Activity extends AppCompatActivity {
-    private ImageView imagenVieww;
+public class Main9Activity extends AppCompatActivity {
+    private ImageView imagenViiew;
     private Filtros filtros;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,25 +17,25 @@ public class Main6Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main6);
 
-        imagenVieww=(ImageView) findViewById(R.id.imageView6);
+        imagenViiew=(ImageView) findViewById(R.id.imageView9);
         filtros=new Filtros();
 
-        BitmapDrawable bitmapDrawable=(BitmapDrawable) imagenVieww.getDrawable();
+        BitmapDrawable bitmapDrawable=(BitmapDrawable) imagenViiew.getDrawable();
         //Bitmap bmp=filtros.greyScale(bitmapDrawable.getBitmap());
 
-        Bitmap bmp=filtros.rotar(bitmapDrawable.getBitmap());
-        imagenVieww.setImageBitmap(bmp);
+        Bitmap bmp=filtros.espejo(bitmapDrawable.getBitmap());
+        imagenViiew.setImageBitmap(bmp);
     }
 
     public void Siguiente(View v)
     {
-        Intent i = new Intent(this, Main7Activity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
     public void Anterior(View v)
     {
-        Intent i = new Intent(this, Main5Activity.class);
+        Intent i = new Intent(this, Main8Activity.class);
         startActivity(i);
     }
 }

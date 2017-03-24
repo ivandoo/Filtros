@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class Main8Activity extends AppCompatActivity {
-        private ImageView imagenView8;
+        private ImageView immagenView;
         private Filtros filtros;
         private Bitmap bmp;
         @Override
@@ -18,29 +18,28 @@ public class Main8Activity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main8);
 
-            imagenView8=(ImageView) findViewById(R.id.imageView7);
+            immagenView=(ImageView) findViewById(R.id.imageView8);
             filtros=new Filtros();
 
-            BitmapDrawable bitmapDrawable=(BitmapDrawable) imagenView8.getDrawable();
+            BitmapDrawable bitmapDrawable=(BitmapDrawable) immagenView.getDrawable();
             //Bitmap bmp=filtros.greyScale(bitmapDrawable.getBitmap());
             if(bmp==null) {
                 filtros.guardarImagen(bitmapDrawable.getBitmap());
-                imagenView8.setImageBitmap(bmp);
+                immagenView.setImageBitmap(bmp);
             }else {
                 filtros.guardarImagen(bitmapDrawable.getBitmap());
-                imagenView8.setImageBitmap(bmp);
+                immagenView.setImageBitmap(bmp);
             }
         }
+    public void Siguiente(View v)
+    {
+        Intent i = new Intent(this, Main9Activity.class);
+        startActivity(i);
+    }
 
-        public void Siguiente(View v)
-        {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-        }
-
-        public void Anterior(View v)
-        {
-            Intent i = new Intent(this, Main6Activity.class);
-            startActivity(i);
-        }
+    public void Anterior(View v)
+    {
+        Intent i = new Intent(this, Main7Activity.class);
+        startActivity(i);
+    }
     }

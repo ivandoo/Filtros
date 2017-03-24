@@ -1,8 +1,14 @@
 package com.example.upam.proyectofiltros;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Shader;
 import android.os.Environment;
 import android.util.Log;
 
@@ -474,7 +480,6 @@ public class Filtros
         return bmp;
     }
 
-
     public void guardarImagen(Bitmap bitmap){
 
         File almacen= Environment.getExternalStorageDirectory();
@@ -482,7 +487,7 @@ public class Filtros
         int n = 10000;
         n = generator.nextInt(n);
         String fname = "Image-"+ n +".jpg";
-        File file = new File (almacen.getAbsolutePath()+"/Pictures", fname);
+        File file = new File (almacen.getAbsolutePath()+"/Imagen", fname);
 
         if (file.exists ()) file.delete ();
         try {
@@ -496,8 +501,33 @@ public class Filtros
             e.printStackTrace();
         }
 
-    }
 
+    }
+    public Bitmap espejo(Bitmap bitmap){
+        int ancho=bitmap.getWidth();
+        int altura=bitmap.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.preScale(1,-1);
+        Bitmap inicial = Bitmap.createBitmap(bitmap, 0,
+                0, ancho, altura , matrix, false);
+
+        Bitmap bmp = Bitmap.createBitmap(ancho,
+                (altura + altura), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        Paint defaultPaint = new Paint();
+        canvas.drawRect(0, altura, ancho, altura, defaultPaint);
+        canvas.drawBitmap(inicial, 0, altura-6 , null);
+        Paint paint = new Paint();
+        LinearGradient shader = new LinearGradient(0,
+                bitmap.getHeight(), 0, bmp.getHeight()
+                , 0x70ffffff, 0x00ffffff, Shader.TileMode.CLAMP);
+        paint.setShader(shader);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        canvas.drawRect(0, altura, ancho, bmp.getHeight()
+                , paint);
+        return bmp;
+    }
 }
 
 
